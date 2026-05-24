@@ -1,9 +1,19 @@
 import { useState, useMemo } from "react";
 
+// Libur SKB 3 Menteri No.1497/2/5 Tahun 2025 — Libur Nasional & Cuti Bersama 2026
 const HOLIDAYS = new Set([
-  "2026-05-01","2026-05-14","2026-05-25",
-  "2026-06-01","2026-06-04","2026-07-06",
-  "2026-08-17","2026-09-21","2026-12-25",
+  "2026-05-01", // Hari Buruh Internasional
+  "2026-05-14", // Kenaikan Yesus Kristus
+  "2026-05-15", // Cuti Bersama Kenaikan Yesus Kristus
+  "2026-05-27", // Idul Adha 1447 H
+  "2026-05-28", // Cuti Bersama Idul Adha
+  "2026-05-31", // Waisak 2570 BE
+  "2026-06-01", // Hari Lahir Pancasila
+  "2026-06-16", // 1 Muharam 1448 H
+  "2026-08-17", // Proklamasi Kemerdekaan
+  "2026-08-25", // Maulid Nabi Muhammad SAW
+  "2026-12-24", // Cuti Bersama Natal
+  "2026-12-25", // Kelahiran Yesus Kristus
 ]);
 function isWD(d) {
   return d.getDay()!==0 && d.getDay()!==6 && !HOLIDAYS.has(d.toISOString().slice(0,10));
@@ -17,12 +27,12 @@ const ALL_WDS = buildWDs(154);
 const fmtL = d => d.toLocaleDateString("id-ID",{day:"2-digit",month:"long",year:"numeric"});
 const fmtS = d => d.toLocaleDateString("id-ID",{day:"2-digit",month:"short"});
 
-// Grand total: 154 HK
-// Persiapan        :  3 HK  HK   1–3
-// KSP Perbatasan   : 11 HK  HK  4–14
-// KSP Banten Lama  : 53 HK  HK 15–67   (14 kegiatan)
-// KSP KP3B         : 52 HK  HK 68–119  (14 kegiatan)
-// Pembahasan & Fin : 35 HK  HK 120–154
+// Grand total: 154 HK  (8 Mei – 21 Desember 2026, libur SKB resmi)
+// Persiapan        :  3 HK  HK   1–3    (selesai 12 Mei)
+// KSP Perbatasan   : 11 HK  HK  4–14    (selesai 3 Jun)
+// KSP Banten Lama  : 53 HK  HK 15–67    (selesai 19 Ags, 14 kegiatan)
+// KSP KP3B         : 52 HK  HK 68–119   (selesai 2 Nov, 14 kegiatan)
+// Pembahasan & Fin : 35 HK  HK 120–154  (serah terima 21 Des)
 
 const TASKS = [
 
@@ -34,7 +44,7 @@ const TASKS = [
     output:"Outline metodologi & rencana kerja tim",
     note:"Pendalaman lingkup KAK; penyusunan kerangka metodologi & pendekatan kerja; rencana kerja lengkap tim untuk 3 KSP; pembagian tugas" },
 
-  // ══ KSP PERBATASAN  HK 4–14  (≤ 29 Mei 2026) ═══════════════════
+  // ══ KSP PERBATASAN  HK 4–14  (≤ 3 Juni 2026) ═══════════════════
   // Tim: TA PWK KSP, TA PWK FPR, Asisten PWK, TA GIS FPR
   // TA Hukum & TA GIS KSP belum kontrak, baru masuk bulan ke-2
   { id:2, phase:"KSP Perbatasan", ksp:"Perbatasan", days:3,
@@ -69,10 +79,10 @@ const TASKS = [
     tags:["perb","lapbul","koordinasi"],
     label:"Update Batang Tubuh & Lampiran Ranpergub  ·  Koordinasi TT Mei  ·  Lap. Bulanan 1",
     pj:"TA PWK KSP, TA PWK FPR",
-    output:"Ranpergub KSP Perbatasan (batang tubuh + lampiran) ✅  |  📅 Lap. Bulanan 1 — HK ke-22 (12 Jun)",
+    output:"Ranpergub KSP Perbatasan (batang tubuh + lampiran) ✅  |  📅 Lap. Bulanan 1 — HK ke-22 (15 Jun)",
     note:"Update batang tubuh dan lampiran Ranpergub KSP Perbatasan. Koordinasi bulanan Tim Teknis PUPR (Mei). Konsultasi Biro Hukum dilakukan di fase Pembahasan saat TA Hukum sudah bergabung. Lap. Bulanan 1 diserahkan HK ke-22" },
 
-  // ══ KSP BANTEN LAMA  HK 15–67  (≤ 31 Agustus 2026)  14 kegiatan  53 HK ═
+  // ══ KSP BANTEN LAMA  HK 15–67  (≤ 19 Agustus 2026)  14 kegiatan  53 HK ═
   // Tim: TA PWK KSP, TA PWK FPR, Asisten PWK, TA GIS FPR, TA GIS KSP, TA Hukum
   { id:7, phase:"KSP Banten Lama", ksp:"Banten Lama", days:4,
     tags:["bl","survei"],
@@ -106,8 +116,8 @@ const TASKS = [
     tags:["lapbul"],
     label:"Laporan Bulanan 2  [HK ke-44]",
     pj:"TA PWK KSP",
-    output:"📅 Laporan Bulanan 2 — HK ke-44 diserahkan (15 Jul)",
-    note:"Laporan progres pekerjaan bulan ke-2; notulensi pembahasan; dokumentasi kegiatan — diserahkan HK ke-44 (15 Juli)" },
+    output:"📅 Laporan Bulanan 2 — HK ke-44 diserahkan (16 Jul)",
+    note:"Laporan progres pekerjaan bulan ke-2; notulensi pembahasan; dokumentasi kegiatan — diserahkan HK ke-44 (16 Juli)" },
 
   { id:12, phase:"KSP Banten Lama", ksp:"Banten Lama", days:4,
     tags:["bl"],
@@ -134,7 +144,7 @@ const TASKS = [
     tags:["lapbul","koordinasi"],
     label:"Laporan Bulanan 3  [HK ke-66]  ·  Koordinasi TT Juli",
     pj:"TA PWK KSP",
-    output:"📅 Laporan Bulanan 3 — HK ke-66 diserahkan (14 Ags)  |  Notulensi koordinasi TT Juli",
+    output:"📅 Laporan Bulanan 3 — HK ke-66 diserahkan (18 Ags)  |  Notulensi koordinasi TT Juli",
     note:"Laporan progres bulan ke-3; koordinasi bulanan Tim Teknis PUPR (Juli) — diserahkan HK ke-66 (14 Agustus)" },
 
   { id:16, phase:"KSP Banten Lama", ksp:"Banten Lama", days:5,
@@ -170,9 +180,9 @@ const TASKS = [
     label:"Batang Tubuh & Lampiran Ranpergub  ·  Konsultasi Biro Hukum  ·  Koordinasi TT Agustus",
     pj:"TA PWK KSP, TA Hukum, TA PWK FPR",
     output:"Ranpergub KSP Banten Lama (batang tubuh + lampiran) ✅  |  Notulensi Biro Hukum  |  Notulensi TT Agustus",
-    note:"Penyusunan pasal-pasal Ranpergub & lampiran matrik rencana aksi. Konsultasi Biro Hukum (1–2x) setelah batang tubuh selesai. Koordinasi Tim Teknis Agustus. Selesai ≤ 31 Agustus 2026" },
+    note:"Penyusunan pasal-pasal Ranpergub & lampiran matrik rencana aksi. Konsultasi Biro Hukum (1–2x) setelah batang tubuh selesai. Koordinasi Tim Teknis Agustus. Selesai ≤ 19 Agustus 2026" },
 
-  // ══ KSP KP3B  HK 68–119  (≤ 30 Oktober 2026)  14 kegiatan  52 HK ═══════
+  // ══ KSP KP3B  HK 68–119  (≤ 2 November 2026)  14 kegiatan  52 HK ═══════
   // Tim: TA PWK KSP, TA PWK FPR, Asisten PWK, TA GIS FPR, TA GIS KSP, TA Hukum
   { id:21, phase:"KSP KP3B", ksp:"KP3B", days:4,
     tags:["kp3b","survei","koordinasi"],
@@ -206,8 +216,8 @@ const TASKS = [
     tags:["lapbul"],
     label:"Laporan Bulanan 4  [HK ke-88]",
     pj:"TA PWK KSP",
-    output:"📅 Laporan Bulanan 4 — HK ke-88 diserahkan (16 Sep)",
-    note:"Laporan progres pekerjaan bulan ke-4; notulensi pembahasan; dokumentasi kegiatan — diserahkan HK ke-88 (16 September)" },
+    output:"📅 Laporan Bulanan 4 — HK ke-88 diserahkan (18 Sep)",
+    note:"Laporan progres pekerjaan bulan ke-4; notulensi pembahasan; dokumentasi kegiatan — diserahkan HK ke-88 (18 September)" },
 
   { id:26, phase:"KSP KP3B", ksp:"KP3B", days:4,
     tags:["kp3b"],
@@ -234,8 +244,8 @@ const TASKS = [
     tags:["lapbul","koordinasi"],
     label:"Laporan Bulanan 5  [HK ke-110]  ·  Koordinasi TT Oktober",
     pj:"TA PWK KSP",
-    output:"📅 Laporan Bulanan 5 — HK ke-110 diserahkan (19 Okt)  |  Notulensi koordinasi TT Oktober",
-    note:"Laporan progres bulan ke-5; koordinasi bulanan Tim Teknis PUPR (Oktober) — diserahkan HK ke-110 (19 Oktober)" },
+    output:"📅 Laporan Bulanan 5 — HK ke-110 diserahkan (20 Okt)  |  Notulensi koordinasi TT Oktober",
+    note:"Laporan progres bulan ke-5; koordinasi bulanan Tim Teknis PUPR (Oktober) — diserahkan HK ke-110 (20 Oktober)" },
 
   { id:30, phase:"KSP KP3B", ksp:"KP3B", days:4,
     tags:["kp3b"],
@@ -270,7 +280,7 @@ const TASKS = [
     label:"Batang Tubuh & Lampiran Ranpergub  ·  Konsultasi Biro Hukum",
     pj:"TA PWK KSP, TA Hukum, TA PWK FPR",
     output:"Ranpergub KSP KP3B (batang tubuh + lampiran) ✅  |  Notulensi Biro Hukum",
-    note:"Penyusunan pasal-pasal Ranpergub & lampiran matrik rencana aksi KSP KP3B. Konsultasi Biro Hukum (1–2x) setelah batang tubuh selesai. Selesai ≤ 30 Oktober 2026" },
+    note:"Penyusunan pasal-pasal Ranpergub & lampiran matrik rencana aksi KSP KP3B. Konsultasi Biro Hukum (1–2x) setelah batang tubuh selesai. Selesai ≤ 2 November 2026" },
 
   // ══ PEMBAHASAN & FINALISASI  HK 120–154  35 HK ══════════════════════════
   { id:35, phase:"Pembahasan & Finalisasi", ksp:"Semua", days:10,
@@ -291,8 +301,8 @@ const TASKS = [
     tags:["lapbul"],
     label:"Laporan Bulanan 6  [HK ke-132]",
     pj:"TA PWK KSP",
-    output:"📅 Laporan Bulanan 6 — HK ke-132 diserahkan (18 Nov)",
-    note:"Laporan progres pekerjaan bulan ke-6 — diserahkan HK ke-132 (18 November)" },
+    output:"📅 Laporan Bulanan 6 — HK ke-132 diserahkan (19 Nov)",
+    note:"Laporan progres pekerjaan bulan ke-6 — diserahkan HK ke-132 (19 November)" },
 
   { id:38, phase:"Pembahasan & Finalisasi", ksp:"Semua", days:8,
     tags:[],
@@ -326,8 +336,8 @@ const TASKS = [
     tags:["lapbul","serahterima"],
     label:"Serah Terima Output Pekerjaan  ·  Laporan Bulanan 7  [HK ke-154]",
     pj:"TA PWK KSP",
-    output:"📋 Berita Acara Serah Terima — HK ke-154 (18 Desember 2026)  |  📅 Laporan Bulanan 7",
-    note:"Penyerahan seluruh output: 3 Ranpergub KSP · Laporan Pendahuluan · Laporan Antara · Laporan Akhir · 3 Ringkasan Eksekutif · 1 Jurnal · 7 Laporan Bulanan — pada HK ke-154, tanggal 18 Desember 2026" },
+    output:"📋 Berita Acara Serah Terima — HK ke-154 (21 Desember 2026)  |  📅 Laporan Bulanan 7",
+    note:"Penyerahan seluruh output: 3 Ranpergub KSP · Laporan Pendahuluan · Laporan Antara · Laporan Akhir · 3 Ringkasan Eksekutif · 1 Jurnal · 7 Laporan Bulanan — pada HK ke-154, tanggal 21 Desember 2026" },
 ];
 
 function buildSchedule() {
@@ -349,10 +359,10 @@ const PS={
 const PHASE_ORDER=["Persiapan","KSP Perbatasan","KSP Banten Lama","KSP KP3B","Pembahasan & Finalisasi"];
 const KCHIP={"Perbatasan":{bg:"#fef3c7",c:"#92400e"},"Banten Lama":{bg:"#d1fae5",c:"#065f46"},"KP3B":{bg:"#ede9fe",c:"#4c1d95"},"Semua":{bg:"#f1f5f9",c:"#475569"}};
 const MILESTONE={
-  6: {label:"🏁 KSP Perbatasan selesai",sub:"≤ 29 Mei 2026",clr:"#d97706"},
-  20:{label:"🏁 KSP Banten Lama selesai",sub:"≤ 31 Agustus 2026",clr:"#059669"},
-  34:{label:"🏁 KSP KP3B selesai",sub:"≤ 30 Oktober 2026",clr:"#7c3aed"},
-  42:{label:"📋 Serah Terima Output Pekerjaan",sub:"HK ke-154 · 18 Desember 2026",clr:"#e11d48"},
+  6: {label:"🏁 KSP Perbatasan selesai",sub:"≤ 3 Juni 2026",clr:"#d97706"},
+  20:{label:"🏁 KSP Banten Lama selesai",sub:"≤ 19 Agustus 2026",clr:"#059669"},
+  34:{label:"🏁 KSP KP3B selesai",sub:"≤ 2 November 2026",clr:"#7c3aed"},
+  42:{label:"📋 Serah Terima Output Pekerjaan",sub:"HK ke-154 · 21 Desember 2026",clr:"#e11d48"},
 };
 const LAP_IDS=new Set([6,11,15,25,29,37,42]);
 const TAG_ICONS={lapbul:"📅",koordinasi:"🤝",hukum:"⚖️",doktek:"📖",gis:"🗺️",survei:"🏕️",serahterima:"📋"};
@@ -377,9 +387,9 @@ export default function App(){
   });
 
   const lapBulSummary=[
-    {n:1,hk:22,tgl:"12 Jun 2026"},{n:2,hk:44,tgl:"15 Jul 2026"},{n:3,hk:66,tgl:"14 Ags 2026"},
-    {n:4,hk:88,tgl:"16 Sep 2026"},{n:5,hk:110,tgl:"19 Okt 2026"},{n:6,hk:132,tgl:"18 Nov 2026"},
-    {n:7,hk:154,tgl:"18 Des 2026"},
+    {n:1,hk:22,tgl:"15 Jun 2026"},{n:2,hk:44,tgl:"16 Jul 2026"},{n:3,hk:66,tgl:"18 Ags 2026"},
+    {n:4,hk:88,tgl:"18 Sep 2026"},{n:5,hk:110,tgl:"20 Okt 2026"},{n:6,hk:132,tgl:"19 Nov 2026"},
+    {n:7,hk:154,tgl:"21 Des 2026"},
   ];
 
   return(
@@ -390,7 +400,7 @@ export default function App(){
           <h1 style={{margin:0,fontSize:18,fontWeight:800,lineHeight:1.3}}>Rencana Kerja Penyempurnaan Ranpergub KSP</h1>
           <p style={{margin:"4px 0 0",fontSize:11,color:"#93c5fd",fontStyle:"italic"}}>KSP Kawasan Perbatasan · KSP Banten Lama · KSP KP3B · 154 Hari Kerja</p>
           <div style={{display:"flex",gap:10,marginTop:14,flexWrap:"wrap"}}>
-            {[["Mulai","8 Mei 2026"],["Selesai","18 Des 2026"],["Total HK","154"],["Tim","6 Tenaga Ahli"],["Output","3 Ranpergub KSP"]].map(([k,v])=>(
+            {[["Mulai","8 Mei 2026"],["Selesai","21 Des 2026"],["Total HK","154"],["Tim","6 Tenaga Ahli"],["Output","3 Ranpergub KSP"]].map(([k,v])=>(
               <div key={k} style={{background:"rgba(255,255,255,0.12)",borderRadius:9,padding:"6px 13px"}}>
                 <div style={{fontSize:8,color:"#7dd3fc",fontWeight:800,letterSpacing:1,textTransform:"uppercase"}}>{k}</div>
                 <div style={{fontSize:14,fontWeight:800}}>{v}</div>
@@ -403,7 +413,7 @@ export default function App(){
       <div style={{background:"#1e293b",padding:"8px 18px"}}>
         <div style={{maxWidth:860,margin:"0 auto",display:"flex",gap:16,flexWrap:"wrap",alignItems:"center"}}>
           <span style={{fontSize:9,fontWeight:800,color:"#475569",textTransform:"uppercase",letterSpacing:1.5}}>Milestone:</span>
-          {[{c:"#0284c7",l:"Persiapan",d:"HK 1–3"},{c:"#d97706",l:"KSP Perbatasan",d:"≤ 29 Mei"},{c:"#059669",l:"KSP Banten Lama",d:"≤ 31 Ags"},{c:"#7c3aed",l:"KSP KP3B",d:"≤ 30 Okt"},{c:"#e11d48",l:"Serah Terima",d:"18 Des · HK-154"}].map(m=>(
+          {[{c:"#0284c7",l:"Persiapan",d:"HK 1–3"},{c:"#d97706",l:"KSP Perbatasan",d:"≤ 3 Jun"},{c:"#059669",l:"KSP Banten Lama",d:"≤ 19 Ags"},{c:"#7c3aed",l:"KSP KP3B",d:"≤ 2 Nov"},{c:"#e11d48",l:"Serah Terima",d:"21 Des · HK-154"}].map(m=>(
             <span key={m.l} style={{display:"flex",alignItems:"center",gap:5,fontSize:11}}>
               <span style={{width:7,height:7,borderRadius:"50%",background:m.c,flexShrink:0,display:"inline-block"}}/>
               <span style={{color:"#e2e8f0",fontWeight:700}}>{m.l}</span>
@@ -531,7 +541,7 @@ export default function App(){
         })}
       </div>
       <div style={{textAlign:"center",padding:"13px",color:"#94a3b8",fontSize:10,borderTop:"1px solid #e2e8f0",background:"#fff"}}>
-        Rencana Kerja Penyempurnaan Ranpergub KSP · PUPR Prov. Banten · TA 2026 · 154 HK · 8 Mei – 18 Desember 2026
+        Rencana Kerja Penyempurnaan Ranpergub KSP · PUPR Prov. Banten · TA 2026 · 154 HK · 8 Mei – 21 Desember 2026
       </div>
     </div>
   );
