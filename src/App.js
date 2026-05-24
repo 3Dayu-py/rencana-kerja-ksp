@@ -365,7 +365,7 @@ const MILESTONE={
   42:{label:"📋 Serah Terima Output Pekerjaan",sub:"HK ke-154 · 21 Desember 2026",clr:"#e11d48"},
 };
 const LAP_IDS=new Set([6,11,15,25,29,37,42]);
-const TAG_ICONS={lapbul:"📅",koordinasi:"🤝",hukum:"⚖️",doktek:"📖",gis:"🗺️",survei:"🏕️",serahterima:"📋"};
+
 
 export default function App(){
   const sched=useMemo(buildSchedule,[]);
